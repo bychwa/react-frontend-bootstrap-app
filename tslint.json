@@ -1,0 +1,10 @@
+{
+  "extends": "tslint-config-standard",
+  "rules": {
+    "align": [true, "statements"],
+    "semicolon": [
+      true,
+      "always"
+    ]
+  }
+}
