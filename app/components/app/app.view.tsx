@@ -3,6 +3,7 @@ import { Container, Segment, Header, Button, Card } from 'semantic-ui-react';
 
 type AppViewProps = {
   onPing: () => void,
+  onPong: () => void,
   app: { isPinging: boolean }
 };
 
@@ -21,7 +22,7 @@ export const AppView = (props: AppViewProps) => {
           </Segment>
         </Card.Content>
         <Card.Content textAlign='center'>
-          <Button primary onClick={() => props.onPing()} content='PING ME' />
+          <Button primary onClick={ props.app.isPinging ? props.onPong : props.onPing } content='PING ME' />
         </Card.Content>
       </Card>
     </Container>);

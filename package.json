@@ -1,12 +1,12 @@
 {
   "name": "frontend-bootstrap",
   "version": "1.0.0",
-  "description": "",
+  "description": "react frontend bootstrap app",
   "main": "index.js",
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "keybase://private/bychwa/frontend-bootstrap"
+  "author": "Jackson Isack <jacksonisack@gmail.com>",
+  "license": "ISC",
+  "scripts": {
+    "start": "node server.js"
   },
   "dependencies": {
     "@types/history": "^3.0.0",

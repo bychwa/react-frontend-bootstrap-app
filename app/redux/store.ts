@@ -1,15 +1,17 @@
 import * as _ from 'lodash';
-import { root } from './reducers';
+import * as reducers from './reducers';
 import * as epics from './epics';
 import { getEnv } from '../utils/environment';
+import { createEpicMiddleware } from 'redux-observable';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+
 const env = getEnv();
 
 const adapter = require('redux-observable-adapter-most').default;
 
-import { createEpicMiddleware } from 'redux-observable';
-import { createStore, applyMiddleware, compose } from 'redux';
-
 export const epicMiddlewares = _.values(epics).map(epic => applyMiddleware(createEpicMiddleware(epic as any, { adapter })));
+
+const rootReducer = combineReducers(reducers);
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -20,4 +22,4 @@ const storeMiddlewares = (env === 'local') ?
   composeEnhancers(...epicMiddlewares) :
   compose(...epicMiddlewares);
 
-export const store = createStore(root, storeMiddlewares);
+export const store = createStore(rootReducer, storeMiddlewares);
