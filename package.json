@@ -1,5 +1,5 @@
 {
-  "name": "frontend-bootstrap",
+  "name": "engine-frontend",
   "version": "1.0.0",
   "description": "react frontend bootstrap app",
   "main": "index.js",
@@ -26,9 +26,10 @@
     "express": "^4.16.2",
     "file-loader": "^1.1.6",
     "history": "^2.1.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.5",
     "most": "^1.7.3",
     "react": "^16.2.0",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
