@@ -2,6 +2,7 @@
   "extends": "tslint-config-standard",
   "rules": {
     "align": [true, "statements"],
+    "space-before-function-paren":false,
     "semicolon": [
       true,
       "always"

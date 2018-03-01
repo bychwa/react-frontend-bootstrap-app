@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Form, Divider, Button, Segment, Header } from 'semantic-ui-react';
+import { Form, Divider, Button, Container } from 'semantic-ui-react';
 
-type CreateEndpointFormProps = {};
+type CreateEndpointFormProps = {
+  onSubmitForm: (e: any, data: any) => void
+};
 
 type CreateEndpointFormState = {
   name: string, type: string,
@@ -13,29 +15,40 @@ type CreateEndpointFormState = {
 
 export class CreateEndpointForm extends React.Component<CreateEndpointFormProps, CreateEndpointFormState> {
 
-  constructor (props: CreateEndpointFormProps) {
+  constructor(props: CreateEndpointFormProps) {
     super(props);
     this.state = {
       name: '', type: '', interval: '', url: '',
       protocol: '', method: '', timeout: ''
     };
     this.onChangeInput = this.onChangeInput.bind(this);
+    this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
-  onChangeInput (_: any, data: any) {
+  onChangeInput(_: any, data: any) {
     this.setState({
       [data.name]: data.value
     });
   }
-
-  render () {
+  onSubmitForm(e: any, _data: any) {
+    const formData = {
+      name: this.state.name,
+      type: this.state.type,
+      interval: this.state.interval,
+      options: {
+        protocol: this.state.protocol,
+        url: this.state.url,
+        method: this.state.method
+      }
+    };
+    this.props.onSubmitForm(e, formData);
+  }
+  render() {
     const endpoint = this.state;
     const PROTOCOL_TYPES = [{ text: 'http://', value: 'http' }, { text: 'https://', value: 'https' }];
     const METHOD_TYPES = [{ text: 'GET', value: 'GET' }, { text: 'POST', value: 'post' }];
     return (
-      <Segment>
-        <Header as='h3'> Create New Endpoint: </Header>
-        <Divider />
+      <Container>
         <Form unstackable>
           <Form.Group widths={3}>
             <Form.Input
@@ -74,9 +87,11 @@ export class CreateEndpointForm extends React.Component<CreateEndpointFormProps,
             />
           </Form.Group>
           <Divider />
-          <Button type='submit' primary>Submit</Button>
+          <Container textAlign='right'>
+            <Button type='submit' primary onClick={this.onSubmitForm}>Submit</Button>
+          </Container>
         </Form>
-      </Segment>
+      </Container>
     );
   }
 }
