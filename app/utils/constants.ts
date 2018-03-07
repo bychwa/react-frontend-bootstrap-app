@@ -1,0 +1,6 @@
+export const CREATE_STATUS = {
+  INIT: 'INIT',
+  PROGRESS: 'PROGRESS',
+  DONE: 'DONE',
+  ERROR: 'ERROR'
+};
