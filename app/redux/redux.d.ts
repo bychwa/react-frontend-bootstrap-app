@@ -5,8 +5,10 @@ export type Epic<A, S> = {
 };
 import { AppState } from './reducers/app';
 import { EndpointsState } from './reducers/endpoints';
+import { DashboardState } from './reducers/dashboard';
 
 type MainState = {
   app: AppState,
-  endpoints: EndpointsState
+  endpoints: EndpointsState,
+  dashboard: DashboardState
 };
