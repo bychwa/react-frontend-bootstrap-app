@@ -12,22 +12,20 @@ type EndpointsViewProps = {
   app: { isPinging: boolean }
 };
 type EndpointsViewState = {
-  activeIndex: number,
-  lastUpdate: number
+  activeIndex: number
 };
 export class EndpointsView extends React.Component<EndpointsViewProps, EndpointsViewState> {
   constructor(props: EndpointsViewProps) {
     super(props);
     this.state = {
-      activeIndex: 0,
-      lastUpdate: Date.now()
+      activeIndex: 0
     };
     this.handleTabChange = this.handleTabChange.bind(this);
   }
+
   componentDidMount() {
     this.props.onFetchEndpoints();
   }
-
   componentWillReceiveProps(props: EndpointsViewProps) {
     if (this.props.state.create_status === CREATE_STATUS.INIT && props.state.create_status === CREATE_STATUS.DONE) {
       this.setState({ activeIndex: 0 });
@@ -40,13 +38,6 @@ export class EndpointsView extends React.Component<EndpointsViewProps, Endpoints
   }
 
   render() {
-    setInterval(() => {
-      if (Date.now() - this.state.lastUpdate > 5000) {
-        this.setState({ lastUpdate: Date.now() });
-        this.props.onFetchEndpoints();
-      }
-    }, 5000);
-
     const panes = [
       {
         menuItem: { key: 'endpoints', icon: 'table', content: 'Endpoints' },
@@ -65,9 +56,9 @@ export class EndpointsView extends React.Component<EndpointsViewProps, Endpoints
           <Tab.Pane
             content={
               <EndpointForm
-                create_status={this.props.state.create_status}
-                onSubmitForm={(_, data) => this.props.onCreateEndpoint(data)}
-              />
+              create_status={this.props.state.create_status}
+              onSubmitForm={(_, data) => this.props.onCreateEndpoint(data)}
+            />
             }
           />
       }
