@@ -3,27 +3,23 @@ import { FETCH_ENDPOINTS, CREATE_ENDPOINT } from '../actions/endpoints';
 import { handleActions } from 'redux-actions';
 import { ASYNC_START, ASYNC_DONE, asyncWrapper, AsyncAction } from '../../utils/async';
 import { EndpointListResponse, RawEndpoint } from '../../utils/backend.d';
-import { CREATE_STATUS } from '../../utils/constants';
 
 export type EndpointsState = {
   endpoints: RawEndpoint[],
-  loading: boolean,
-  create_status: string
+  loading: boolean
 };
 
-const initialState = { endpoints: [], loading: false, create_status: CREATE_STATUS.INIT } as EndpointsState;
+const initialState = { endpoints: [], loading: false } as EndpointsState;
 
 const toLoadingState = (state: EndpointsState) => ({ ...state, loading: true });
 
 const onCreateEndpointDone = (state: EndpointsState, _action: AsyncAction<any, EndpointListResponse>) => {
-  return { ...state, loading: false, create_status: CREATE_STATUS.DONE };
+  return { ...state, loading: false };
 };
-
 const onFetchEndpointsDone = (state: EndpointsState, action: AsyncAction<any, EndpointListResponse>) => {
   if (action.payload && action.payload.data) {
     return {
       ...state,
-      loading: false,
       endpoints: action.payload.data._data.map(e => (e._data))
     };
   } else {

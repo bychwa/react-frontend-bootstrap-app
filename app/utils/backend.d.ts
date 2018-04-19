@@ -6,7 +6,6 @@ export type RawEndpoint = {
   name: string,
   type: string,
   interval: number,
-  status?: string,
   __v: number,
   lastAssert: string,
   options: {
